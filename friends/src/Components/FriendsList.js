@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Friend from './Friend'
 
 
 class FriendsList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       friends: []
     };
@@ -24,8 +25,22 @@ class FriendsList extends React.Component {
   }
 
   render() {
-    return <Friend />
+    return(
+      <div className="friend-list">
+        {this.state.friends.map(friend => (
+          <Friends key={friend.id} friend={friend} />
+        ))}
+      </div>
+    );
   }
+}
+
+function Friends({ friend }) {
+  return(
+    <Link to={`/friends/${friend.id}`}>
+      <Friend friend={friend} />
+    </Link>
+  );
 }
 
 export default FriendsList;
